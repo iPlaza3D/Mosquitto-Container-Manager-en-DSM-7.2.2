@@ -1,0 +1,15 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: Mosquitto
+    environment:
+      - TZ=Europe/Madrid    
+    volumes:
+      - ./config:/mosquitto/config:rw
+      - ./data:/mosquitto/data:rw
+      - ./log:/mosquitto/log:rw
+    ports:
+      - 1883:1883
+      - 9001:9001
+    restart: unless-stopped
+    # command: chmod -R 0700 /mosquitto/data/mosquitto.db (Para arreglar los permisos de escritura. Consultar registro del contenedor para ver los errores)
